@@ -1,0 +1,73 @@
+::-moz-selection {
+background:#e06d5e;
+}
+::selection {
+background:#e06d5e;
+}
+
+.navbar .brand a:hover {
+	color:black;
+}
+
+
+
+ul#menu-main > li > a:hover {
+	color: black;
+}
+
+
+ul#menu-main > li > a:focus,ul#menu-main > li > a:active, ul#menu-main > li > a.selected, ul#menu-main li a.selected:active    {
+	color: black;
+}
+#header-wrapper h1 span {
+	color:black;
+}
+
+#header-wrapper input[type=submit] {
+	background: black !important;
+}
+
+#theme-form input[type=submit] {
+	background: black !important;
+}
+
+.btn.btn-theme {
+	background: #26c8aa !important;
+}
+
+/* blog */
+.home-post .post-meta {
+	background: black;
+}
+
+/* com */
+.tabbable ul.nav-tabs li.active a,.tabbable ul.nav-tabs li a:hover {
+	color: black;
+}
+.accordion .accordion-heading a.active {
+	color: black;
+}
+
+#tweet ul li a {
+	color: black;
+}
+
+
+/* works */
+#filters ul li a:hover h5, #filters ul li a.active h5 {
+	background: black;
+	border-color: black;
+}
+
+.portfolio .portfolio-overlay {
+	background: black;
+}
+
+/* icon */
+i.icon-bgdark:hover {
+	background: #26c8aa;
+}
+
+i.icon-bgdark.active {
+	background: #e06d5e;
+}

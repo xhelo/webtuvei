@@ -1,0 +1,6 @@
+reemplaza inicio.html o cámbialo de nombre
+en la carpeta z copia la carpeta de angular con el nombre angular-1.6.4
+listo
+
+En inicio, los formularios tienen angular, solo falta la BDs para conexion
+

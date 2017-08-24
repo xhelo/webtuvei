@@ -1,0 +1,75 @@
+/**
+ * cbpAnimatedHeader.js v1.0.0
+ * http://www.codrops.com
+ *
+ * Licensed under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ *
+ * Copyright 2013, Codrops
+ * http://www.codrops.com
+ */
+var cbpAnimatedHeader = (function() {
+
+    var docElem = document.documentElement,
+        header          = document.querySelector( '.navbar-default' ),
+        logo_yellow     = document.querySelector( '.logo_yellow' ),
+        logo            = document.querySelector( '.logo' ),
+        navbar_toggle   = document.querySelector( '.navbar-toggle' ),
+        goto_top        = document.querySelector( '.goto-top' ),
+        goto_down       = document.querySelector( '.goto-down' ),
+        nav             = document.querySelector( '.navbar-nav' ),
+        nav_home        = document.querySelector( '.navbar-home' ),
+        didScroll = false,
+        changeHeaderOn = 568;
+
+    function init() {
+        window.addEventListener( 'scroll', function( event ) {
+            if( !didScroll ) {
+                didScroll = true;
+                setTimeout( scrollPage, 300 );
+            }
+        }, false );
+    }
+
+    function scrollPage() {
+        var sy = scrollY();
+        if ( sy >= changeHeaderOn ) {
+            classie.add( header, 'navbar-shrink' );
+            classie.add( logo_yellow, 'hide' );
+            classie.add( nav_home, 'hide' );
+            classie.add( goto_down, 'hide' );
+            classie.remove( logo, 'hide' );
+            classie.remove( goto_top, 'hide' );
+            classie.remove( nav, 'hide' );
+            classie.remove( navbar_toggle, 'hide' );
+            $('.navbar-default').addClass('bg-opacity');
+
+            $(document).load($(window).bind("resize", checkPosition));
+            function checkPosition(){
+                if($(window).width() < 767){
+                    $('#fat-menu1 ul').removeClass('dropdown-menu');
+                } else {
+                    $('#fat-menu1 ul').addClass('dropdown-menu');
+                }
+            }
+        }
+        else {
+            classie.remove( header, 'navbar-shrink' );
+            classie.remove( logo_yellow, 'hide' );
+            classie.remove( nav_home, 'hide' );
+            classie.remove( goto_down, 'hide' );
+            classie.add( logo, 'hide' );
+            classie.add( goto_top, 'hide' );
+            classie.add( nav, 'hide' );
+            classie.add( navbar_toggle, 'hide' );
+        }
+        didScroll = false;
+    }
+
+    function scrollY() {
+        return window.pageYOffset || docElem.scrollTop;
+    }
+
+    init();
+
+})();

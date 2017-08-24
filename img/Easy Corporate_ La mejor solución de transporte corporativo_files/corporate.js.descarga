@@ -1,0 +1,331 @@
+/**
+ * {} jQuery for page scrolling feature - requires jQuery Easing plugin
+ */
+$(function() {
+    $('a.page-scroll').bind('click', function(event) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+            scrollTop: $($anchor.attr('href')).offset().top
+        }, 1500, 'easeInOutExpo');
+        event.preventDefault();
+    });
+});
+
+
+/**
+ * {} Highlight the top nav as scrolling occurs
+ */
+$('body').scrollspy({
+    target: '.navbar-fixed-top'
+});
+
+
+$(document).ready(function (){
+    /**
+     * {} Closes the Responsive Menu on Menu Item Click
+     */
+    $('.navbar-collapse ul li a').click(function() {
+        $('.navbar-toggle:visible').click();
+    });
+
+
+    /**
+     * {} Remove all attr data-lang=[lang]
+     */
+    $('a[href="#"]').removeAttr('href').css('cursor','default');
+
+
+    /**
+     * {} Animate click button see more
+     */
+    $('.goto-down').addClass('animated bounce');
+
+    /**
+     * {} Hide the .bnt-video modal for data-lang=[lang]
+     */
+    $('#lang a').click(function(){
+        var lang = $(this).attr('data-lang');
+        langVideo(lang);
+    });
+
+    /**
+     * {} Set Carousel Interval
+     */
+    $('.carousel').carousel({
+        interval: 1000 * 10
+    });
+
+    /**
+     * {} Input Form Reset
+     */
+    window.onload   = $('.reset').click();
+});
+
+
+/**
+ * {} Remove all attr data-lang=[lang]
+ */
+$(function(){
+    $('.btn-video').click(function(){
+        $('video').trigger('play');
+    });
+    $('body').on('hidden.bs.modal', '.modal', function () {
+        $('video').trigger('pause');
+        $('#video').hide();
+        $('#video iframe').attr("src", jQuery("#video iframe").attr("src"));
+    });
+});
+
+
+/**
+ * {} Differential Section Navigation
+ */
+$('#differential .toggle-option-right .toggle').click(function(){
+    $('#differential .company').removeClass('hide');
+    $('#differential .employee').addClass('hide');
+
+    $('#differential .arrow-large.arrow-left').removeClass('hide');
+    $('#differential .arrow-large.arrow-right').addClass('hide');
+
+    $('#differential .toggle-option-left .toggle').css('backgroundPosition','-44px -61px' );
+    $('#differential .toggle-option-right .toggle').css('backgroundPosition','-92px -11px' );
+    $('#differential .toggle-option-left h4').css('color','#d1d1d1' );
+    $('#differential .toggle-option-right h4').css('color','#757575' );
+
+});
+
+$('#differential .arrow-large.arrow-right').click(function(){
+    $('#differential .toggle-option-right .toggle').trigger('click');
+    $('#differential .company img').addClass('animate bounceIn');
+});
+$('#differential .arrow-large.arrow-left').click(function(){
+    $('#differential .toggle-option-left .toggle').trigger('click');
+    $('#differential .employee img').addClass('animate bounceIn');
+});
+
+$('#differential .toggle-option-left .toggle').click(function(){
+    $('#differential .company').addClass('hide');
+    $('#differential .employee').removeClass('hide');
+
+    $('#differential .arrow-large.arrow-left').addClass('hide');
+    $('#differential .arrow-large.arrow-right').removeClass('hide');
+
+    $('#differential .toggle-option-left .toggle').css('backgroundPosition','-44px -10px' );
+    $('#differential .toggle-option-right .toggle').css('backgroundPosition','-92px -61px' );
+    $('#differential .toggle-option-right h4').css('color','#d1d1d1' );
+    $('#differential .toggle-option-left h4').css('color','#757575' );
+});
+
+
+/**
+ * {} How it Works Section Navigation
+ */
+$('#howitworks .toggle-option-right .toggle').click(function(){
+    $('#howitworks .company').removeClass('hide');
+    $('#howitworks .employee').addClass('hide');
+    $('#howitworks .toggle-option-left .toggle').css('backgroundPosition','-44px -61px' );
+    $('#howitworks .toggle-option-right .toggle').css('backgroundPosition','-92px -11px' );
+    $('#howitworks .toggle-option-left h4').css('color','#d1d1d1' );
+    $('#howitworks .toggle-option-right h4').css('color','#757575' );
+});
+
+$('#howitworks .toggle-option-left .toggle').click(function(){
+    $('#howitworks .company').addClass('hide');
+    $('#howitworks .employee').removeClass('hide');
+    $('#howitworks .toggle-option-left .toggle').css('backgroundPosition','-44px -10px' );
+    $('#howitworks .toggle-option-right .toggle').css('backgroundPosition','-92px -61px' );
+    $('#howitworks .toggle-option-right h4').css('color','#d1d1d1' );
+    $('#howitworks .toggle-option-left h4').css('color','#757575' );
+});
+
+$('#howitworks .employee h4:eq(0).step').hover(function(){
+    $('#howitworks .step').removeClass('hide');
+});
+
+
+/**
+ * {} Steps - How it Works Section
+ */
+var stepsActive = $('.step');
+var steps = $('.step h4');
+//$('.step h4').hide()  ;
+
+$('.step').each(function(i) {
+    var step = steps.eq(i);
+    var stepActive = stepsActive.eq(i);
+
+    $(this).on({
+        mouseover: function() {
+            step.show();
+            stepActive.addClass('active');
+        }
+//      mouseout:  function() { step.hide(); }
+    });
+});
+
+
+/**
+ * {} Set Slide Image transition
+ */
+var rotateEvery = 4; // 4seconds
+var images = [
+    "../img/bg-header-3-easy-taxi.jpg",
+    "../img/bg-header-2-easy-taxi.jpg",
+    "../img/bg-header-1-easy-taxi.jpg"];
+var curImage = 0;
+setInterval(delayFunction, rotateEvery*1000);
+function delayFunction() {
+    if(curImage == images.length){
+        curImage = 0;
+    }
+    $('header').fadeIn(400,function(){
+        $(this).css("background-image",'url('+images[curImage]+')').fadeIn(400);
+        curImage++;
+    });
+}
+
+
+/**
+ * {} Set Text transition
+ */
+$(function () {
+var counter = 0,
+    divs = $('#text1, #text2, #text3');
+    divs.hide();
+    function showDiv () {
+        divs.hide()
+            .filter(function (index) { return index == counter % 3; }) // figure out correct div to show
+            .fadeIn(400); // show it
+        counter++;
+    } // function to loop through divs and show correct div
+
+    showDiv(); // show first div
+
+    setInterval(function () {
+        showDiv(); // show next div
+    }, 4 * 1000); // do this every 4 seconds
+});
+
+
+
+/**
+ * {} Show input field when choose 'Others' option
+ */
+$(function() {
+    $('#00NG000000E67FV').change(function(){
+        $('.otherDescription').hide().val('');
+        $('#' + $(this).val()).show();
+    });
+});
+
+/**
+ * {} Input allowed only number
+ */
+$( "input.number" ).on('input', function() {
+    var allowing_number_except_zero = $(this).val().replace(/[^0-9]+$/g, '');
+    if ( allowing_number_except_zero < 1 ){
+        $(this).val('');
+    }
+    else {
+        $(this).val(allowing_number_except_zero);
+    }
+});
+
+/**
+ * {} Get URL vars
+ */
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+function getQueryStringElement(element, parameter){
+    $(element).val(getParameterByName(parameter));
+}
+
+$(window).load(function() {
+    getQueryStringElement('.index #00NG000000EvH8w', 'utm_source');
+    getQueryStringElement('.index #00NG000000EvH96', 'utm_campaign');
+    getQueryStringElement('.index #00NG000000EvH91', 'utm_content');
+    getQueryStringElement('.in-app #last_name', 'name');
+    getQueryStringElement('.in-app #phone', 'phone');
+    getQueryStringElement('.in-app #email', 'email');
+
+    if ( getParameterByName('email') ) {
+        ga('send', 'event', 'Landing Page in APP', 'viewed by ' +
+        getParameterByName('email') + ' (' + getParameterByName('name') + ' - ' + getParameterByName('phone') + '), ' + 'Not Completed');
+    }
+});
+
+$(document).ready(function (){
+    $('input[name=email]').change(function(){
+        var email  = $(this).val();
+        var retURL = 'http://corp.easytaxi.com/br/success.html?email='+email;
+        var retURL_InApp = 'http://corp.easytaxi.com/br/in-app-success.html?email='+email;
+        document.getElementById('retURL').value = retURL;
+        $('.in-app #retURL').val(retURL_InApp);
+    });
+});
+
+
+/**
+ * {} Get currency
+ */
+function ajustaMoeda(value) {
+    if (value =='BR') {
+        document.getElementById('currency').value = 'BRL';
+        document.getElementById('recordType').value = '012G00000010lRl';
+        document.getElementById('Campaign_ID').value = '701G00000012ltd';
+    }
+    else if (value == 'CO') {
+        document.getElementById('currency').value = 'COP';
+        document.getElementById('recordType').value = '012G00000010lRn';
+        document.getElementById('Campaign_ID').value = '701G0000001WUUP';
+    }
+    else if (value == 'CL'){
+        document.getElementById('currency').value = 'CLP';
+        document.getElementById('recordType').value = '012G00000010lRm';
+        document.getElementById('Campaign_ID').value = '701G0000001WUUj';
+    }
+    else if (value == 'EC'){
+        document.getElementById('currency').value = 'USD';
+        document.getElementById('recordType').value = '012G00000010sbq';
+        document.getElementById('Campaign_ID').value = '701G0000001WUUe';
+    }
+    else if (value == 'MX'){
+        document.getElementById('currency').value = 'MXN';
+        document.getElementById('recordType').value = '012G00000010olk';
+        document.getElementById('Campaign_ID').value = '701G0000001WUUU';
+    }
+    else if (value == 'PE'){
+        document.getElementById('currency').value = 'PEN';
+        document.getElementById('recordType').value = '012G00000010olv';
+        document.getElementById('Campaign_ID').value = '701G0000001WUUZ';
+    }
+    else {
+        document.getElementById('currency').value = 'EUR';
+        document.getElementById('recordType').value = '';
+        document.getElementById('Campaign_ID').value = '';
+    }
+}
+
+/**
+ * {} Append terms url to iframe
+ */
+$('#terms').on('click', function(){
+    $('#termsIframe').attr('src','https://et-static.s3.amazonaws.com/terms/corporate-terms.html');
+});
+
+/**
+ * {} Get current year
+ */
+var fullYear = new Date().getFullYear();
+$('.current-year').text(fullYear);
+
+
+
